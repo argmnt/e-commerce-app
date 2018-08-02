@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  *
  * @author yagiz
  */
-@ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
+@ResponseStatus(HttpStatus.NOT_FOUND)
 public class OutOfStockException extends RuntimeException {
 
 }
