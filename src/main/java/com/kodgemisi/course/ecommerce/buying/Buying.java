@@ -2,6 +2,7 @@ package com.kodgemisi.course.ecommerce.buying;
 
 import com.kodgemisi.course.ecommerce.user.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class Buying implements Serializable {
 
     @Id
@@ -22,6 +24,8 @@ public class Buying implements Serializable {
     private User buyer;
 
     // implement buying info
+    @OneToOne
+    private PaymentInfo paymentInfo;
 
     @OneToMany
     private Set<SellingProduct> sellingProducts;
@@ -35,10 +39,13 @@ public class Buying implements Serializable {
     @NotNull
     private BuyingStatus buyingStatus;
 
-    public Buying(User buyer, Set<SellingProduct> sellingProducts, @NotNull PaymentType paymentType) {
+    public Buying(User buyer, PaymentInfo paymentInfo, Set<SellingProduct> sellingProducts, @NotNull PaymentType paymentType) {
         this.buyer = buyer;
+        this.paymentInfo = paymentInfo;
         this.sellingProducts = sellingProducts;
         this.paymentType = paymentType;
         this.buyingStatus = BuyingStatus.PREPARING;
     }
+
+
 }
